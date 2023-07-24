@@ -1,0 +1,32 @@
+.location_des {
+     color: #000;
+	& > ul {
+		font-family: BrandonLight;
+		& > li {
+			font-family: BrandonLight;
+            
+		}
+	}
+}
+.contact_des {
+	& > span {
+		font-family: BrandonLight;
+	}
+}
+.top_des {
+	& > span {
+		font-family: BrandonLight;
+	}
+}
+.heading-footer {
+	& > p {
+		font-family: BrandonLight;
+	}
+}
+.footer-bottom {
+     
+    border-top: 1px solid #e8e8f2;
+    &  p {
+        font-family: BrandonLight;
+    }
+}

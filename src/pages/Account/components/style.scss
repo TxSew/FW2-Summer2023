@@ -1,0 +1,15 @@
+.form-control input {
+     border: 1px solid #e5e5e5
+}
+.google-login,
+.facebook-login {
+     position: relative;
+     &>img {
+          position: absolute;
+          width: 36px;
+          left: 5px;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 30px;
+     }
+}

@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 import "./style.scss";
 import ItemProduct from "../../components/itemsProduct/ItemProduct";
+import { useEffect, useState } from "react";
+import ProductApi from "../../api/components/ProductApi";
 const Category = () => {
+	 //handle category page sort
+	const handlePageClick = () => {
+		 const totalItems = data.length;
+		 const itemsPerPage = 6
+	};
+
+
+
+
+	//fetch data
+	const [data, setdata] = useState([]);
+	useEffect(() => {
+		function fetchCategory() {
+			ProductApi.getAll().then((res) => {
+				console.log(res);
+				if (res) {
+					setdata(res);
+				} else {
+				}
+			});
+		}
+		fetchCategory();
+	}, []);
+
 	return (
 		<div className="wapper_category">
 			<div className="navbar bg-[#eee]">
@@ -64,11 +91,23 @@ const Category = () => {
 						</div>
 						{/* product Category List */}
 						<div className="listProductCategory mt-5 flex flex-wrap">
-								<ItemProduct name="helo" price={"390.0"} images={"hello"} />
-								<ItemProduct name="helo" price={"390.0"} images={"hello"} />
-								<ItemProduct name="helo" price={"390.0"} images={"hello"} />
-								<ItemProduct name="helo" price={"390.0"} images={"hello"} />
+							{data.map((e) => {
+								return (
+									<ItemProduct params={e.slug} images={e.imageUrl} name={e.name} price={e.price} />
+								);
+							})}
 						</div>
+						<ReactPaginate
+							previousLabel={"←"}
+							nextLabel={"→"}
+							pageCount={4}
+							onPageChange={handlePageClick}
+							containerClassName={"pagination"}
+							previousLinkClassName={"pagination__link"}
+							nextLinkClassName={"pagination__link"}
+							disabledClassName={"pagination__link--disabled"}
+							activeClassName={"pagination__link--active"}
+						/>
 					</div>
 				</div>
 			</div>

@@ -4,3 +4,53 @@ ul.items-categories {
           
      }
 }
+
+
+
+
+// pagigate pages
+h1 {
+    color: #363636;
+  }
+  
+  .pagination {
+    display: flex;
+     justify-content: center;
+    list-style: none;
+    gap:5px;
+    cursor: pointer;
+  }
+  
+  .pagination a {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #989898;
+    color: #515050;
+    user-select: none;
+      -moz-user-select: none; /* Firefox support */
+      -webkit-user-select: none; /* Chrome, Safari, Opera support */
+      -ms-user-select: none; /* Internet Explorer support */
+  }
+  
+  .pagination__link {
+    font-weight: bold;
+  }
+  
+  .pagination__link--active a {
+    color: #fff;
+    background: #5c5b5b;
+    user-select: none;
+      -moz-user-select: none; /* Firefox support */
+      -webkit-user-select: none; /* Chrome, Safari, Opera support */
+      -ms-user-select: none; /* Internet Explorer support */
+  }
+  
+  .pagination__link--disabled a {
+    color: rgb(55, 54, 54);
+    border: 1px solid rgb(198, 197, 202);
+    user-select: none;
+      -moz-user-select: none; /* Firefox support */
+      -webkit-user-select: none; /* Chrome, Safari, Opera support */
+      -ms-user-select: none; /* Internet Explorer support */
+  }
+  

@@ -6,13 +6,17 @@ import Home from "../pages/Home";
 import DetailProduct from "../pages/Products/Detail";
 import Category from "../pages/Products/Category";
 import CartDetail from "../pages/Cart/CartDetail";
+import Dashboard from "../pages/Admin/Dashboard";
+import addProduct from "../pages/Admin/components/addProduct";
 
 const PublicRouter = [
 	{ path: config.routes.home, component: Home }, 
 	{ path: config.routes.login, component: Login },
 	{ path: config.routes.register, component: Register },
-	{ path: config.routes.detail, component: DetailProduct },
-	{ path: config.routes.category, component: Category },
+	{ path: config.routes.detail, component: DetailProduct},
+	{ path: config.routes.category, component: Category},
+	{path: '/admins', component: Dashboard, isAdmin: true},
+	{path: '/admins/addProduct', component: addProduct, isAdmin: true},
 	{ path: config.routes.cartDetail, component: CartDetail , reset : true },
 // PrivateRouter
 ]

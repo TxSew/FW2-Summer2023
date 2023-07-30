@@ -6,27 +6,30 @@ import { useEffect, useState } from "react";
 import ProductApi from "../../api/components/ProductApi";
 const Category = () => {
 	 //handle category page sort
-	const handlePageClick = () => {
-		 const totalItems = data.length;
-		 const itemsPerPage = 6
+	 
+	const handlePageClick = (e) => {
+		  console.log(e.selected); 
+		   const pageNumber = e.selected + 1
+		    ProductApi.getSortPage(pageNumber).then((res) => {
+				 console.log(res.rows);
+				 const pageSize = res.rows
+				 setdata(pageSize)
+			})
 	};
-
-
-
-
 	//fetch data
 	const [data, setdata] = useState([]);
 	useEffect(() => {
-		function fetchCategory() {
-			ProductApi.getAll().then((res) => {
+		function fetchCategory(count) {
+			ProductApi.getSortPage(1).then((res) => {
 				console.log(res);
 				if (res) {
-					setdata(res);
+					 console.log(res);
+					setdata(res.rows);
 				} else {
 				}
 			});
 		}
-		fetchCategory();
+		fetchCategory(1);
 	}, []);
 
 	return (
@@ -91,9 +94,9 @@ const Category = () => {
 						</div>
 						{/* product Category List */}
 						<div className="listProductCategory mt-5 flex flex-wrap">
-							{data.map((e) => {
+							{data.map((e ,i) => {
 								return (
-									<ItemProduct params={e.slug} images={e.imageUrl} name={e.name} price={e.price} />
+									<ItemProduct key={i} params={e.slug} images={e.imageUrl} name={e.name} price={e.price} />
 								);
 							})}
 						</div>

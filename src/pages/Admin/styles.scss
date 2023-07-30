@@ -1,0 +1,68 @@
+body{
+    background-color: #f6f6f6;
+    margin-top:20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+
+.card .card-header {
+    border-bottom-color: #f9f9f9;
+    line-height: 30px;
+    -ms-grid-row-align: center;
+    align-self: center;
+    width: 100%;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+}
+
+.card .card-header, .card .card-body, .card .card-footer {
+    background-color: transparent;
+    padding: 20px 25px;
+}
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.flex {
+   display: flex;
+}
+ .search-dashboard {
+   border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 2px 20px;
+     outline: none;
+ }
+.action-dashboard {
+   display: flex;
+   gap:5px
+}
+
+.ngx-pagination li {
+  display: inline-block;
+  margin: 2px;
+  padding: 5px;
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+.ngx-pagination li.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.ngx-pagination li.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ngx-pagination li a {
+  color: #333;
+  text-decoration: none;
+}

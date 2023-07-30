@@ -47,7 +47,7 @@ function ItemProduct({ name, price, params, images }) {
       </div>
       <div className="img-product  w-[100%] h-[306px]">
         <Link to={`/products/${params}`}>
-        <img className="h-[290px]"   src={images} alt="ss" /> 
+        <img className="h-[290px] w-[100%]"   src={images} alt="ss" /> 
         </Link>
       </div>
       <div className="content-product">

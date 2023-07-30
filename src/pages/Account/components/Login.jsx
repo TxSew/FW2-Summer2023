@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 import MyInput from "../../../components/myInput/myInput";
 import AccountApi from "./../../../api/components/AccountApi.js";
 import { useNavigate } from "react-router-dom";
+
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Login() {
 	const redirect = useNavigate();
 	const {
@@ -34,9 +37,13 @@ function Login() {
 		console.log(values);
 		const fetchUser = async () => {
 			const data = await AccountApi.checkUser(values);
-			 if(data) {
-				 redirect('/')
-			 }
+			console.log(data);
+			localStorage.setItem('token', JSON.stringify(data));
+			  if(data) {
+				//  toast.success('Success Login',{
+				// 	position:"bottom-right"
+				//  })
+			  }
 		};
 		fetchUser();
 	};

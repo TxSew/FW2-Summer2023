@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
+import ProductApi from '../../api/components/ProductApi';
 
 const initialState = {
-  value: [],
+  productItem: [],
 };
 
 export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-       detailProduct: (state, action) => {
-      state.value += action.payload;
-    },
+    addProduct: (state, action) =>  {
+      ProductApi.add(state.productItem)
+      .then((res) => {
+         console.log(res);
+      })
+    }
   },
 });
 

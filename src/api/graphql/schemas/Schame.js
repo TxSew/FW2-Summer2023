@@ -8,6 +8,8 @@ const ExampleQuery = gql`
 	 slug
 	 price
 	 imageUrl
+	 categoryID
+	 
     }
   }
 `

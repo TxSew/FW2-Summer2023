@@ -6,6 +6,9 @@ import ItemProduct from "../../../components/itemsProduct/ItemProduct";
 
 import { ExampleQuery } from "../../../api/graphql/schemas/Schame";
 import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
+import ProductApi from "../../../api/components/ProductApi";
+import { useState } from "react";
 
 const Category = styled.ul`
 	.active {
@@ -18,9 +21,14 @@ const Category = styled.ul`
 	}
 `;
 function Product() {
+
 	const { data, loading, error } = useQuery(ExampleQuery);
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;
+
+	  
+
+	 
 	return (
 		<section className="product text-center pt-[30px]">
 			<h2 className="text-[20px] uppercase font-[700]">Cửa Hàng</h2>
@@ -58,7 +66,7 @@ function Product() {
 			<div className="product">
 				<div className="container">
 					<div className="product-box flex flex-wrap w-[100%]">
-						{data.getClothes.slice(0, 6).map((items, index) => {
+						{data.getClothes.slice(0, 8).map((items, index) => {
               console.log(items.imageUrl);
 							return (
 								<ItemProduct

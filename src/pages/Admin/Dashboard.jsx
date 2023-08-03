@@ -2,50 +2,78 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductApi from "../../api/components/ProductApi";
 import "./styles.scss";
+import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import { set } from "react-hook-form";
 
 function Dashboard() {
-	const [data, setData] = useState([]);
 	const [search, setSearch] = useState("");
-	useEffect(() => {
-		ProductApi.getAll().then((res) => {
-			console.log(res);
-			setData(res);
-		});
-	}, []);
+	const [data, setdata] = useState([]);
+
+
+  //fetch data
+  useEffect(() => {
+	  function fetchCategory(count) {
+		  ProductApi.getSortPage(1).then((res) => {
+			  console.log(res);
+			  if (res) {
+				   console.log(res);
+				  setdata(res.rows);
+			  } else {
+			  }
+		  });
+	  }
+	  fetchCategory(1);
+
+	  
+  }, []);
+  const handlePageClick = (e) => {
+	console.log(e.selected); 
+	 const pageNumber = e.selected + 1
+	  ProductApi.getSortPage(pageNumber).then((res) => {
+		   console.log(res.rows);
+		   const pageSize = res.rows
+		   setdata(pageSize)
+	  })
+};
 	useEffect(() => {}, []);
 	function handelSearch(e) {
 		const newValue = e.target.value;
 		console.log(newValue);
 		setSearch(newValue);
-		ProductApi.search(newValue).then((res) => {
-			console.log(res);
-			setData(res);
-		});
+	
+			  ProductApi.search(newValue).then((res) => {
+				  console.log(res);
+				  
+				  setdata(res);
+			  });
 	}
 	function handelRemove(id) {
 		console.log(id);
 		ProductApi.remove(id).then((err, res) => {
 			if (!err) {
-				toast.success("Product removed successfully", {
+				// eslint-disable-next-line no-restricted-globals
+				if (confirm("Are you sure you want to remove this product")) {
+					toast.success("Product removed successfully", {
+						position: "top-center",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
+					return window.location.reload();
+				}
+			} else {
+				toast.error("Product removed Error", {
 					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
 				});
 			}
-			 else {
-				toast.error("Product removed Error", {
-					 position: "top-center"
-				});
-			 }
 		});
 	}
-
 	return (
-		<div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+		<div className="">
 			<div className="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
 				<div className="flex items-center flex-1 space-x-4">
 					<input
@@ -63,7 +91,7 @@ function Dashboard() {
 					<input type="text" />
 				</div>
 				<a
-					href="admin/create"
+					href="/admins/addProduct"
 					className="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3"
 				>
 					<button
@@ -92,7 +120,7 @@ function Dashboard() {
 							<tr key={i} className="border-b bg-white hover:bg-gray-100 admin-list">
 								<td className="py-3 px-6 text-left whitespace-nowrap">
 									<div className="flex items-center">
-										<span className="text-[13px]">{i++}</span>
+										<span className="text-[13px]"></span>
 									</div>
 								</td>
 								<td className="py-3 px-6 text-left whitespace-nowrap">
@@ -123,8 +151,8 @@ function Dashboard() {
 								</td>
 								<td className="py-3 px-6 text-center">
 									<div className="flex item-center justify-center">
-										<a
-											href="admin/update/{{item.slug}}/"
+										<Link
+											to={`/admins/updateProduct/${e.productID}`}
 											className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
 										>
 											<svg
@@ -140,7 +168,7 @@ function Dashboard() {
 													d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
 												></path>
 											</svg>
-										</a>
+										</Link>
 										<div
 											className="w-4 jr-2 transform hover:text-purple-500 hover:scale-110"
 											onClick={() => handelRemove(e.productID)}
@@ -166,6 +194,19 @@ function Dashboard() {
 					})}
 				</tbody>
 			</table>
+			<div className="btn-paginate mt-2">
+				<ReactPaginate
+					previousLabel={"←"}
+					nextLabel={"→"}
+					pageCount={10}
+					onPageChange={handlePageClick}
+					containerClassName={"pagination"}
+					previousLinkClassName={"pagination__link"}
+					nextLinkClassName={"pagination__link"}
+					disabledClassName={"pagination__link--disabled"}
+					activeClassName={"pagination__link--active"}
+				/>
+			</div>
 		</div>
 	);
 }

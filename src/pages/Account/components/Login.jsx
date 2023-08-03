@@ -39,10 +39,29 @@ function Login() {
 			const data = await AccountApi.checkUser(values);
 			console.log(data);
 			localStorage.setItem('token', JSON.stringify(data));
-			  if(data) {
-				//  toast.success('Success Login',{
-				// 	position:"bottom-right"
-				//  })
+			  if(data.message === "error") {
+
+				 toast.error('Email not default',{
+					position:"bottom-right"
+				 })
+			  }
+			  else if(data.message=== "Password is not define") {
+                  
+				 toast.error('Password is not define',{
+					position:"bottom-right"
+				 })
+			  }
+			  else {
+				 
+				 toast.success('Success Login',{
+					position:"bottom-right"
+				 })
+				  localStorage.setItem('isChecked', JSON.stringify(data.user))
+				
+					  redirect('/')
+					  window.location.reload()
+					
+				
 			  }
 		};
 		fetchUser();

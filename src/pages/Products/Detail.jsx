@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ProductApi from "../../api/components/ProductApi";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +10,9 @@ import { addToCart } from "../../redux/Card/CardReducer";
 
 function DetailProduct() {
 	const count = useSelector((state) => state.counter.value);
-
+	const [selectedSize, setSelectedSize] = useState("medium");
+	const [active, setActive] = useState('not-active');
+	console.log(selectedSize);
 	const dispatch = useDispatch();
 	const [detail, setDetail] = useState({});
 	const { slug } = useParams();
@@ -70,9 +72,14 @@ function DetailProduct() {
 						<div className="size_detail mt-5 ">
 							<label htmlFor="">Kích thước</label>
 							<div className="size_detail-btn flex gap-4 pt-2">
-								<button className="px-3 py-2  border-[1px] border-[#ccc] border-solid ">M</button>
-								<button className="px-3 py-2 border-[1px] border-[#ccc] border-solid ">L</button>
-								<button className="px-3 py-2 border-[1px] border-[#ccc] border-solid   ">S</button>
+
+								<button className={"px-3 py-2 border-[1px] border-[#ccc] border-solid "} onClick={() => {
+									setSelectedSize("midiun")
+									setActive('active')
+								}}>M</button>
+
+								<button className="px-3 py-2 border-[1px] border-[#ccc] border-solid " onClick={() => setSelectedSize("large")}>L</button>
+								<button className="px-3 py-2 border-[1px] border-[#ccc] border-solid   " onClick={() => setSelectedSize("small")}>S</button>
 							</div>
 						</div>
 						<div className="quality_detail mt-3">

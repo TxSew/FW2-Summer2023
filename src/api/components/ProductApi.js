@@ -10,8 +10,12 @@ class ProductApi {
 		const url = `products/${id}`;
 		return AxiosClient.get(url);
 	}
-	getSortPage(id) {
-		const url = `/collections?page=${id}`;
+	getUpdate(id) {
+		const url = `products/getUpdate/${id}`;
+		return AxiosClient.get(url);
+	}
+	getSortPage(id, search = "") {
+		const url = `/collections?page=${id}&&q=${search}`;
 		return AxiosClient.get(url);
 	}
 	//axios add
@@ -19,13 +23,18 @@ class ProductApi {
 		const url = `/products/store`;
 		return AxiosClient.post(url, data);
 	}
-	 search(data) {
-		 const url = `/products/search?name=${data}`;
-         return AxiosClient.get(url);
-	 }
-	 //remove items
-	  remove(id) {
-        const url = `/products/delete/${id}`;
-        return AxiosClient.delete(url );}
+	update(data) {
+		const url = `/products/update`;
+		return AxiosClient.post(url, data);
+	}
+	search(data) {
+		const url = `/products/search?name=${data}`;
+		return AxiosClient.get(url);
+	}
+	//remove items
+	remove(id) {
+		const url = `/products/delete/${id}`;
+		return AxiosClient.delete(url);
+	}
 }
 export default new ProductApi();

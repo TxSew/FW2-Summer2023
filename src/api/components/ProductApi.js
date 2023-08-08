@@ -23,8 +23,8 @@ class ProductApi {
 		const url = `/products/store`;
 		return AxiosClient.post(url, data);
 	}
-	update(data) {
-		const url = `/products/update`;
+	update(data, id) {
+		const url = `/products/update?productID=${id}`;
 		return AxiosClient.post(url, data);
 	}
 	search(data) {

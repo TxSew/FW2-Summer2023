@@ -10,44 +10,53 @@ function Dashboard() {
 	const [search, setSearch] = useState("");
 	const [data, setdata] = useState([]);
 
-
-  //fetch data
-  useEffect(() => {
-	  function fetchCategory(count) {
-		  ProductApi.getSortPage(1).then((res) => {
-			  console.log(res);
-			  if (res) {
-				   console.log(res);
-				  setdata(res.rows);
-			  } else {
-			  }
-		  });
-	  }
-	  fetchCategory(1);
-
-	  
-  }, []);
-  const handlePageClick = (e) => {
-	console.log(e.selected); 
-	 const pageNumber = e.selected + 1
-	  ProductApi.getSortPage(pageNumber).then((res) => {
-		   console.log(res.rows);
-		   const pageSize = res.rows
-		   setdata(pageSize)
-	  })
-};
+	//fetch data
+	useEffect(() => {
+		function fetchCategory(count) {
+			ProductApi.getSortPage(1)
+				.then((res) => {
+					console.log(res);
+					if (res) {
+						console.log(res);
+						setdata(res.rows);
+					} else {
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+		fetchCategory(1);
+	}, []);
 	useEffect(() => {}, []);
 	function handelSearch(e) {
 		const newValue = e.target.value;
 		console.log(newValue);
 		setSearch(newValue);
-	
-			  ProductApi.search(newValue).then((res) => {
-				  console.log(res);
-				  
-				  setdata(res);
-			  });
+
+		ProductApi.search(newValue)
+			.then((res) => {
+				console.log(res);
+
+				setdata(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
+
+	const handlePageClick = (e) => {
+		console.log(e.selected);
+		const pageNumber = e.selected + 1;
+		ProductApi.getSortPage(pageNumber).then((res) => {
+			console.log(res.rows);
+			const pageSize = res.rows;
+			setdata(pageSize);
+		})
+		.catch((err) => {
+			 console.log(err);
+		})
+	};
 	function handelRemove(id) {
 		console.log(id);
 		ProductApi.remove(id).then((err, res) => {

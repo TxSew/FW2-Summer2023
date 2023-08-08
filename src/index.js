@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import App from "./App";
 import GlobalStyle from "./components/GlobalStyle";
-import { store } from "./redux";
+import { store } from "./redux/StoreClient";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import { ApolloProvider } from "@apollo/client";

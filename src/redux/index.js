@@ -1,1 +1,1 @@
-export { store } from './StoreClient'
+export * from './Product/ProductReducer.js'
